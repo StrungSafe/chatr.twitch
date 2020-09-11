@@ -2,7 +2,7 @@
 
 The intention of this project is to provide a way to merge twitch chats.
 
-## Questions
+## Questions test
 
 1. Is this only temporary for non twitch partners? i.e. partners get chat merging?
 2. Do we want to allow a discord chat merge too?
