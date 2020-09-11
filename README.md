@@ -4,9 +4,9 @@ The intention of this project is to provide a way to merge twitch chats.
 
 ## Questions
 
-1. Is this only temporary for non twitch partners? i.e. partners get chat merging?
-1. Do we want to allow a discord chat merge too?
-  1. Should we specify a specific channel?
+1.  Is this only temporary for non twitch partners? i.e. partners get chat merging?
+1.  Do we want to allow a discord chat merge too?
+  1.  Should we specify a specific channel?
 1. Can the twitch bot perform random funny actions? Like farting?
 1. Should the twitch bot get it's own avatar?
 1. How should the merged chat be shown?
