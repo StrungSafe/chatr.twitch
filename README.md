@@ -2,18 +2,23 @@
 
 The intention of this project is to provide a way to merge twitch chats.
 
-## Questions
+## Requirements
 
-1. Is this only temporary for non twitch partners? i.e. partners get chat merging?
-2. Do we want to allow a discord chat merge too?
-    1. Should we specify a specific channel?
-3. Can the twitch bot perform random funny actions? Like farting?
-4. Should the twitch bot get it's own avatar?
-5. How should the merged chat be shown?
-    1. Can we impersonate as another user?
-    2. Should we just highlight the message made by another user? (use the user's username from the source? what if we don't have a username for whatever reason)
-    3. Should there be some user's we exclude? (can ommit other's streamers bots and bot messages)
-    4. How should we deal with a message that has been edited or deleted in the source?
-6. How will hosting be performed? (we might have a server available by lemon but what if this project should be available to the public?)
-    1. If the configuration for the bot changes per streaming night then we might want to have the streamer run the bot locally
- 
+* Specify/identify co-streamer and merge chat from their stream into our streamer's chat
+* Use the same visual that twitch uses for chat merge if possible
+    * If not possible then identify the user in some manner that it's coming from co-stream
+* Able to configure bot for each co-streamer
+* Able to configure bot to ignore some chat messages
+    * Specify users
+    * Specify commands (maybe start with anything that starts with !)
+* Able to specify at least one co-stream but more if possible
+    * An upper limit of four-six should be fine
+* Have random actions the bot can take
+    * This should be configurable, action(s) and time
+* If possible then the co-streamer's mod control our chat too (i.e. delete messages)
+    * Can we confirm this is what twitch does too?
+* Allow chat merging from discord too
+    * Configurable channel used for chat merging
+    * Configurable highlighting of chat merging
+* Easy to run bot locally
+    * Assuming hosting will be hard because of configuration changes at least until full website available and multi-tenant
