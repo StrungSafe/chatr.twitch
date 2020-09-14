@@ -1,6 +1,6 @@
 # Twitch Chat Merger
 
-The intention of this project is to provide a way to merge twitch chats.
+The intention of this bot is to provide a way to merge twitch chats while a streamer is co-streaming; we want to 'import' the co-streamer's chat into our chat.
 
 ## MVP
 
