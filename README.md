@@ -14,7 +14,7 @@ The intention of this project is to provide a way to merge twitch chats.
     * Assuming we will probably need the bot to be run locally because the configuration will need to change per co-stream
     * Assuming hosting will be hard because of configuration changes at least until full website available and multi-tenant
 
-## Phase II and Beyond
+## VP
 
 * Able to configure bot to ignore some chat messages
     * Specify users
