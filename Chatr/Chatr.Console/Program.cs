@@ -1,12 +1,23 @@
-﻿
-namespace Chatr.Console
+﻿namespace Chatr.Console
 {
-using System;
-    class Program
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        private static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args).ConfigureServices((context, services) =>
+            {
+                services.AddLogging();
+
+                services.AddHostedService<Bot>();
+            });
         }
     }
 }
