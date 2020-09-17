@@ -12,7 +12,6 @@
     using TwitchLib.Client.Events;
     using TwitchLib.Client.Interfaces;
     using TwitchLib.Client.Models;
-    using TwitchLib.Communication.Interfaces;
 
     internal class Bot : IHostedService
     {
@@ -20,9 +19,7 @@
 
         private readonly ILogger logger;
 
-        private IClient client;
-
-        private ITwitchClient twitchClient;
+        private ITwitchClient client;
 
         public Bot(IOptions<BotConfig> config, ILogger<Bot> logger)
         {
@@ -37,32 +34,29 @@
             string channel = config.Channel;
 
             var credentials = new ConnectionCredentials(username, token);
-            twitchClient = new TwitchClient(null, ClientProtocol.TCP);
+            client = new TwitchClient(protocol: ClientProtocol.TCP);
 
-            twitchClient.OnMessageReceived += Client_OnMessageReceived;
+            client.OnMessageReceived += Client_OnMessageReceived;
 
-            twitchClient.Initialize(credentials, channel);
+            client.Initialize(credentials, channel);
 
             logger.LogInformation("Twitch client connecting");
 
-            twitchClient.Connect();
+            client.Connect();
 
             logger.LogInformation("Twitch client connected");
 
-            twitchClient.JoinChannel(channel);
+            client.JoinChannel(channel);
 
             await Task.Delay(0);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            twitchClient.Disconnect();
+            client.Disconnect();
 
-            twitchClient.OnMessageReceived -= Client_OnMessageReceived;
+            client.OnMessageReceived -= Client_OnMessageReceived;
 
-            client.Dispose();
-
-            twitchClient = null;
             client = null;
 
             await Task.Delay(0);
@@ -70,7 +64,8 @@
 
         public void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
         {
-            logger.LogInformation("Message received! {message}", e.ChatMessage.Message);
+            logger.LogInformation("Message received! {channel} {message}", e.ChatMessage.Channel,
+                e.ChatMessage.Message);
         }
     }
 }
