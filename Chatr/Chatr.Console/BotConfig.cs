@@ -1,11 +1,15 @@
 ﻿namespace Chatr.Console
 {
+    using System.Collections.Generic;
+
     internal class BotConfig
     {
-        public string Channel { get; set; }
-
-        public string Token { get; set; }
+        public ICollection<string> Destinations { get; set; }
 
         public string Name { get; set; }
+
+        public ICollection<string> Sources { get; set; }
+
+        public string Token { get; set; }
     }
 }

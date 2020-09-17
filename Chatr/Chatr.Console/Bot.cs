@@ -1,5 +1,6 @@
 ﻿namespace Chatr.Console
 {
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -31,14 +32,13 @@
         {
             string username = config.Name;
             string token = config.Token;
-            string channel = config.Channel;
 
             var credentials = new ConnectionCredentials(username, token);
             client = new TwitchClient(protocol: ClientProtocol.TCP);
 
-            client.OnMessageReceived += Client_OnMessageReceived;
+            logger.LogInformation("Initializing twitch client");
 
-            client.Initialize(credentials, channel);
+            client.Initialize(credentials);
 
             logger.LogInformation("Twitch client connecting");
 
@@ -46,7 +46,10 @@
 
             logger.LogInformation("Twitch client connected");
 
-            client.JoinChannel(channel);
+            ConnectToChannels(config.Sources);
+            ConnectToChannels(config.Destinations);
+
+            client.OnMessageReceived += Client_OnMessageReceived;
 
             await Task.Delay(0);
         }
@@ -62,10 +65,26 @@
             await Task.Delay(0);
         }
 
-        public void Client_OnMessageReceived(object sender, OnMessageReceivedArgs e)
+        public void Client_OnMessageReceived(object sender, OnMessageReceivedArgs onMessageReceivedArgs)
         {
-            logger.LogInformation("Message received! {channel} {message}", e.ChatMessage.Channel,
-                e.ChatMessage.Message);
+            if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel))
+            {
+                logger.LogDebug("Echo message from channel: {channel} message: {message}",
+                    onMessageReceivedArgs.ChatMessage.Channel, onMessageReceivedArgs.ChatMessage.Message);
+                return;
+            }
+
+            logger.LogDebug("Nothing to echo");
+        }
+
+        private void ConnectToChannels(ICollection<string> channels)
+        {
+            foreach (string channel in channels)
+            {
+                logger.LogInformation("Joining channel {channel}", channel);
+                client.JoinChannel(channel);
+                logger.LogInformation("Channel {channel} joined", channel);
+            }
         }
     }
 }
