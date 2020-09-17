@@ -42,6 +42,8 @@
 
             string username = config.Name;
             string token = config.Token;
+            ICollection<string> sources = GetWithMax(config.Sources);
+            ICollection<string> destinations = GetWithMax(config.Destinations);
 
             var credentials = new ConnectionCredentials(username, token);
             client = new TwitchClient(protocol: ClientProtocol.TCP);
@@ -56,8 +58,8 @@
 
             logger.LogInformation("Twitch client connected");
 
-            ConnectToChannels(config.Sources);
-            ConnectToChannels(config.Destinations);
+            ConnectToChannels(sources);
+            ConnectToChannels(destinations);
 
             client.OnMessageReceived += Client_OnMessageReceived;
 
@@ -121,6 +123,11 @@
             JoinedChannel joined = client.GetJoinedChannel(channel);
 
             client.SendMessage(joined, chatMessage.Message);
+        }
+
+        private ICollection<string> GetWithMax(ICollection<string> values)
+        {
+            return values.Take(config.MaxConnections).ToList();
         }
     }
 }
