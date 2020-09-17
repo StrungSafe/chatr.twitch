@@ -26,3 +26,7 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 * Allow chat merging from discord too
     * Configurable channel used for chat merging
     * Configurable highlighting of chat merging
+
+# Notes
+
+* Can use https://twitchapps.com/tmi/ to create an oauth token
