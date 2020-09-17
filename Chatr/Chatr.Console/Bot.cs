@@ -1,5 +1,6 @@
 ﻿namespace Chatr.Console
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
@@ -23,6 +24,8 @@
 
         private ITwitchClient client;
 
+        private bool disposed;
+
         public Bot(IOptions<BotConfig> config, ILogger<Bot> logger)
         {
             this.config = config.Value;
@@ -31,6 +34,11 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            if (disposed)
+            {
+                throw new Exception("This class is already disposed of, create a new instance first");
+            }
+
             string username = config.Name;
             string token = config.Token;
 
@@ -57,7 +65,12 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            client.Disconnect();
+            disposed = true;
+
+            if (client.IsConnected)
+            {
+                client.Disconnect();
+            }
 
             client.OnMessageReceived -= Client_OnMessageReceived;
 
