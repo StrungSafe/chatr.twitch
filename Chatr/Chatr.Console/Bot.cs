@@ -66,16 +66,21 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            logger.LogInformation("Bot disposing");
             disposed = true;
 
             if (client.IsConnected)
             {
+                logger.LogInformation("Twitch client disconnecting");
                 client.Disconnect();
+                logger.LogInformation("Twitch client disconnected");
             }
 
             client.OnMessageReceived -= Client_OnMessageReceived;
 
             client = null;
+
+            logger.LogInformation("Bot disposed");
 
             await Task.Delay(0);
         }
