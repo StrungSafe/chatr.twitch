@@ -17,6 +17,7 @@
                 services.AddLogging();
 
                 services.AddHostedService<Bot>();
+                services.Configure<BotConfig>(context.Configuration.GetSection(nameof(BotConfig)));
             });
         }
     }
