@@ -36,7 +36,8 @@
         {
             if (disposed)
             {
-                throw new Exception("This class is already disposed of, create a new instance first");
+                throw new ObjectDisposedException(nameof(Bot),
+                    "This class is already disposed of, create a new instance first");
             }
 
             string username = config.Name;
