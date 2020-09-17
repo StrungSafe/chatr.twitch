@@ -4,7 +4,7 @@
     "Chatr.Console": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "development"
+        "DOTNET_ENVIRONMENT": "development"
       }
     }
   }
