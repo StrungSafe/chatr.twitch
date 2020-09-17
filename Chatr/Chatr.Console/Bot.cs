@@ -1,6 +1,7 @@
 ﻿namespace Chatr.Console
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -79,7 +80,7 @@
 
         private void ConnectToChannels(ICollection<string> channels)
         {
-            foreach (string channel in channels)
+            foreach (string channel in channels ?? Enumerable.Empty<string>())
             {
                 logger.LogInformation("Joining channel {channel}", channel);
                 client.JoinChannel(channel);
