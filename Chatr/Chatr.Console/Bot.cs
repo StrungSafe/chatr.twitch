@@ -1,6 +1,5 @@
 ﻿namespace Chatr.Console
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -13,20 +12,18 @@
     using TwitchLib.Client.Events;
     using TwitchLib.Client.Interfaces;
     using TwitchLib.Client.Models;
-    using TwitchLib.Client.Models.Internal;
-    using TwitchLib.Communication.Clients;
     using TwitchLib.Communication.Interfaces;
-    using TwitchLib.Communication.Models;
 
     internal class Bot : IHostedService
     {
         private readonly BotConfig config;
 
-        private ITwitchClient twitchClient;
-
         private readonly ILogger logger;
 
         private IClient client;
+
+        private ITwitchClient twitchClient;
+
         public Bot(IOptions<BotConfig> config, ILogger<Bot> logger)
         {
             this.config = config.Value;
@@ -62,7 +59,7 @@
             twitchClient.Disconnect();
 
             twitchClient.OnMessageReceived -= Client_OnMessageReceived;
-            
+
             client.Dispose();
 
             twitchClient = null;
