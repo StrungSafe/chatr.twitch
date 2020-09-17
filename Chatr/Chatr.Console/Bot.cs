@@ -85,6 +85,7 @@
             {
                 logger.LogDebug("Echo message from channel: {channel} message: {message}",
                     onMessageReceivedArgs.ChatMessage.Channel, onMessageReceivedArgs.ChatMessage.Message);
+                Echo(config.Destinations, onMessageReceivedArgs.ChatMessage);
                 return;
             }
 
@@ -99,6 +100,21 @@
                 client.JoinChannel(channel);
                 logger.LogInformation("Channel {channel} joined", channel);
             }
+        }
+
+        private void Echo(ICollection<string> channels, ChatMessage chatMessage)
+        {
+            foreach (string channel in channels)
+            {
+                Echo(channel, chatMessage);
+            }
+        }
+
+        private void Echo(string channel, ChatMessage chatMessage)
+        {
+            JoinedChannel joined = client.GetJoinedChannel(channel);
+
+            client.SendMessage(joined, chatMessage.Message);
         }
     }
 }
