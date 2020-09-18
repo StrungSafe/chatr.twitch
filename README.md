@@ -27,7 +27,35 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
     * Configurable channel used for chat merging
     * Configurable highlighting of chat merging
 
+# Configuration
+
+```
+"BotConfig": {
+    "name": "Chatr",
+    "token": "oauth:ChatrToken",
+    "channel": "streamer",
+    "destinations": [
+    ],
+    "sources": [
+      "source1"
+    ],
+    "ignoreChatFrom": [
+    ],
+    "ignoreCommandFrom": [
+    ]
+},
+```
+
+1. Name - The bot's name (might not really do anything)
+2. Token - OAuth token
+3. Channel - This streamer's channel
+4. Destinations - Additional channels to echo chat
+5. Sources - Co-streamer's that we want to merge chat from
+6. IgnoreChatFrom - A list of user's that we should ignore any chat messages
+7. IgnoreCommandFrom - A list of user's that we should ignore any commands
+
 # Notes
 
 * Can use https://twitchapps.com/tmi/ to create an oauth token
 * Seems we must use TCP vs WebSockets, should confirm
+* We are setup to only respond to commands from the streamer's channel
