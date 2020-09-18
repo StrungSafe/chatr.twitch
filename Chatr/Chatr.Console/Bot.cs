@@ -78,7 +78,7 @@
 
             if (client.IsConnected)
             {
-                logger.LogInformation("Twitch client disconnecting");
+                logger.LogDebug("Twitch client disconnecting");
                 client.Disconnect();
                 logger.LogInformation("Twitch client disconnected");
             }
