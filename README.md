@@ -5,7 +5,7 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 ## MVP
 
 * Specify/identify co-streamer and merge chat from their stream into our streamer's chat
-* Use the same visual that twitch uses for chat merge if possible
+* ~Use the same visual that twitch uses for chat merge if possible~
     * If not possible then identify the user in some manner that it's coming from co-stream
 * Able to configure bot for each co-streamer
     * Able to specify at least one co-stream but more if possible
@@ -21,8 +21,8 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
     * Specify commands (maybe start with anything that starts with !)
 * Have random actions the bot can take
     * This should be configurable, action(s) and time
-* If possible then the co-streamer's mod control our chat too (i.e. delete messages)
-    * Can we confirm this is what twitch does too?
+* ~If possible then the co-streamer's mod control our chat too (i.e. delete messages)~
+    * ~Can we confirm this is what twitch does too?~
 * Allow chat merging from discord too
     * Configurable channel used for chat merging
     * Configurable highlighting of chat merging
