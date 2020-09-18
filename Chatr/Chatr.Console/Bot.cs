@@ -104,6 +104,7 @@
             if (string.Equals(onChatCommandReceivedArgs.Command.ChatMessage.Channel, config.Channel))
             {
                 logger.LogDebug("Received a command we want to handle");
+                client.SendMessage(config.Channel, "beep boop");
             }
         }
 
@@ -149,7 +150,7 @@
 
         private void Echo(ICollection<string> channels, ChatMessage chatMessage)
         {
-            foreach (string channel in channels)
+            foreach (string channel in channels ?? Enumerable.Empty<string>())
             {
                 Echo(channel, chatMessage);
             }
@@ -164,6 +165,11 @@
 
         private ICollection<string> Get(ICollection<string> collection)
         {
+            if (collection == null)
+            {
+                return new List<string>(0);
+            }
+
             return ToLower(GetWithMax(collection));
         }
 
@@ -175,7 +181,7 @@
         private bool ShouldIgnore(ICollection<string> ignoreFrom, ChatMessage chatMessage, out string username)
         {
             username = chatMessage.Username;
-            return ignoreFrom.Contains(chatMessage.Username);
+            return ignoreFrom?.Contains(chatMessage.Username) ?? false;
         }
 
         private ICollection<string> ToLower(ICollection<string> collection)

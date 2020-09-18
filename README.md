@@ -33,15 +33,18 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 "BotConfig": {
     "name": "Chatr",
     "token": "oauth:ChatrToken",
-    "channel": "streamer",
+    "channel": "streamer"
     "destinations": [
+      "destination1"
     ],
     "sources": [
       "source1"
     ],
     "ignoreChatFrom": [
+      "ignore1"
     ],
     "ignoreCommandFrom": [
+      "ignore1"
     ]
 },
 ```
