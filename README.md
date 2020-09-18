@@ -29,5 +29,5 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 
 # Notes
 
-* Can use https://twitchapps.com/tmi/ to create an oauth token (only tested using oauth so far)
+* Can use https://twitchapps.com/tmi/ to create an oauth token
 * Seems we must use TCP vs WebSockets, should confirm

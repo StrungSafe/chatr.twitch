@@ -45,14 +45,14 @@
             ICollection<string> sources = GetWithMax(config.Sources);
             ICollection<string> destinations = GetWithMax(config.Destinations);
 
-            var credentials = new ConnectionCredentials(username, token);
-            client = new TwitchClient(protocol: ClientProtocol.TCP);
-
             logger.LogInformation("Initializing twitch client");
 
+            client = new TwitchClient(protocol: ClientProtocol.TCP);
+            var credentials = new ConnectionCredentials(username, token);
             client.Initialize(credentials);
+            client.AddChatCommandIdentifier('!');
 
-            logger.LogInformation("Twitch client connecting");
+            logger.LogDebug("Twitch client connecting");
 
             client.Connect();
 
@@ -62,6 +62,7 @@
             ConnectToChannels(destinations);
 
             client.OnMessageReceived += Client_OnMessageReceived;
+            client.OnChatCommandReceived += Client_OnChatCommandReceived;
 
             await Task.Delay(0);
         }
@@ -93,11 +94,16 @@
             {
                 logger.LogDebug("Echo message from channel: {channel} message: {message}",
                     onMessageReceivedArgs.ChatMessage.Channel, onMessageReceivedArgs.ChatMessage.Message);
-                Echo(config.Destinations, onMessageReceivedArgs.ChatMessage);
+                Echo(onMessageReceivedArgs.ChatMessage);
                 return;
             }
 
             logger.LogDebug("Nothing to echo");
+        }
+
+        private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
+        {
+            logger.LogDebug("Command received");
         }
 
         private void ConnectToChannels(ICollection<string> channels)
@@ -108,6 +114,11 @@
                 client.JoinChannel(channel);
                 logger.LogInformation("Channel {channel} joined", channel);
             }
+        }
+
+        private void Echo(ChatMessage chatMessage)
+        {
+            Echo(config.Destinations, chatMessage);
         }
 
         private void Echo(ICollection<string> channels, ChatMessage chatMessage)
@@ -122,7 +133,7 @@
         {
             JoinedChannel joined = client.GetJoinedChannel(channel);
 
-            client.SendMessage(joined, chatMessage.Message);
+            client.SendMessage(joined, $"{chatMessage.Username}@{chatMessage.Channel} - {chatMessage.Message}");
         }
 
         private ICollection<string> GetWithMax(ICollection<string> values)
