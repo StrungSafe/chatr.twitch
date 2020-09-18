@@ -18,6 +18,8 @@
 
     internal class Bot : IHostedService
     {
+        private const char commandIdentifier = '!';
+
         private readonly BotConfig config;
 
         private readonly ILogger logger;
@@ -51,7 +53,7 @@
             client = new TwitchClient(protocol: ClientProtocol.TCP);
             var credentials = new ConnectionCredentials(username, token);
             client.Initialize(credentials);
-            client.AddChatCommandIdentifier('!');
+            client.AddChatCommandIdentifier(commandIdentifier);
 
             logger.LogDebug("Twitch client connecting");
 
@@ -118,13 +120,20 @@
 
             if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel))
             {
+                if (onMessageReceivedArgs.ChatMessage.Message.StartsWith(commandIdentifier)
+                    && !config.KeepCommandsSynced)
+                {
+                    logger.LogDebug("Not going to echo command");
+                    return;
+                }
+
                 logger.LogDebug("Echo message from channel: {channel} message: {message}",
                     onMessageReceivedArgs.ChatMessage.Channel, onMessageReceivedArgs.ChatMessage.Message);
                 Echo(onMessageReceivedArgs.ChatMessage);
                 return;
             }
 
-            logger.LogDebug("Nothing to echo");
+            logger.LogDebug("Not going to echo");
         }
 
         private void ConnectToChannels(string channel)

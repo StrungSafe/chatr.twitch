@@ -12,7 +12,9 @@
 
         public ICollection<string> IgnoreCommandFrom { get; set; } = new List<string>();
 
-        public int MaxConnections { get; set; }
+        public bool KeepCommandsSynced { get; set; } = true;
+
+        public int MaxConnections { get; set; } = 6;
 
         public string Name { get; set; }
 
