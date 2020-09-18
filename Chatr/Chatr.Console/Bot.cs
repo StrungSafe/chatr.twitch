@@ -42,8 +42,9 @@
 
             string username = config.Name;
             string token = config.Token;
-            ICollection<string> sources = GetWithMax(config.Sources);
-            ICollection<string> destinations = GetWithMax(config.Destinations);
+            string channel = config.Channel;
+            ICollection<string> sources = Get(config.Sources);
+            ICollection<string> destinations = Get(config.Destinations);
 
             logger.LogInformation("Initializing twitch client");
 
@@ -58,6 +59,7 @@
 
             logger.LogInformation("Twitch client connected");
 
+            ConnectToChannels(channel);
             ConnectToChannels(sources);
             ConnectToChannels(destinations);
 
@@ -88,8 +90,31 @@
             await Task.Delay(0);
         }
 
-        public void Client_OnMessageReceived(object sender, OnMessageReceivedArgs onMessageReceivedArgs)
+        private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs onChatCommandReceivedArgs)
         {
+            if (ShouldIgnore(config.IgnoreCommandFrom, onChatCommandReceivedArgs.Command.ChatMessage,
+                out string username))
+            {
+                logger.LogDebug($"Ignoring command from {username}");
+                return;
+            }
+
+            logger.LogDebug("Command received");
+
+            if (string.Equals(onChatCommandReceivedArgs.Command.ChatMessage.Channel, config.Channel))
+            {
+                logger.LogDebug("Received a command we want to handle");
+            }
+        }
+
+        private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs onMessageReceivedArgs)
+        {
+            if (ShouldIgnore(config.IgnoreChatFrom, onMessageReceivedArgs.ChatMessage, out string username))
+            {
+                logger.LogDebug($"Ignoring message from {username}");
+                return;
+            }
+
             if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel))
             {
                 logger.LogDebug("Echo message from channel: {channel} message: {message}",
@@ -101,23 +126,24 @@
             logger.LogDebug("Nothing to echo");
         }
 
-        private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
+        private void ConnectToChannels(string channel)
         {
-            logger.LogDebug("Command received");
+            logger.LogInformation("Joining channel {channel}", channel);
+            client.JoinChannel(channel);
+            logger.LogInformation("Channel {channel} joined", channel);
         }
 
         private void ConnectToChannels(ICollection<string> channels)
         {
             foreach (string channel in channels ?? Enumerable.Empty<string>())
             {
-                logger.LogInformation("Joining channel {channel}", channel);
-                client.JoinChannel(channel);
-                logger.LogInformation("Channel {channel} joined", channel);
+                ConnectToChannels(channel);
             }
         }
 
         private void Echo(ChatMessage chatMessage)
         {
+            Echo(config.Channel, chatMessage);
             Echo(config.Destinations, chatMessage);
         }
 
@@ -136,9 +162,25 @@
             client.SendMessage(joined, $"{chatMessage.Username}@{chatMessage.Channel} - {chatMessage.Message}");
         }
 
+        private ICollection<string> Get(ICollection<string> collection)
+        {
+            return ToLower(GetWithMax(collection));
+        }
+
         private ICollection<string> GetWithMax(ICollection<string> values)
         {
             return values.Take(config.MaxConnections).ToList();
+        }
+
+        private bool ShouldIgnore(ICollection<string> ignoreFrom, ChatMessage chatMessage, out string username)
+        {
+            username = chatMessage.Username;
+            return ignoreFrom.Contains(chatMessage.Username);
+        }
+
+        private ICollection<string> ToLower(ICollection<string> collection)
+        {
+            return collection.Select(item => item.ToLower()).ToList();
         }
     }
 }
