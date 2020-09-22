@@ -10,7 +10,7 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 - [X] Able to configure bot for each co-streamer
     * Able to specify at least one co-stream but more if possible
         * An upper limit of four-six should be fine
-- [ ] Easy to run bot
+- [X] Easy to run bot
     * Assuming we will probably need the bot to be run locally because the configuration will need to change per co-stream
     * Assuming hosting will be hard because of configuration changes at least until full website available and multi-tenant
 
@@ -19,13 +19,13 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 - [X] Able to configure bot to ignore some chat messages
     * Specify users
     * Specify commands (maybe start with anything that starts with !)
-- [ ] Have random actions the bot can take
+- [X] Have random actions the bot can take
     * This should be configurable, action(s) and time
 - [ ] ~If possible then the co-streamer's mod control our chat too (i.e. delete messages)~
     * ~Can we confirm this is what twitch does too?~
-- [ ] Allow chat merging from discord too
+- [X] Allow chat merging from discord too
     * Configurable channel used for chat merging
-    * Configurable highlighting of chat merging
+    * ~Configurable highlighting of chat merging~
 
 # Configuration
 
