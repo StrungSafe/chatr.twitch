@@ -174,11 +174,25 @@
                 return;
             }
 
-            logger.LogTrace($"Going to echo message to channel {channel} {chatMessage.Message}");
-
             JoinedChannel joined = client.GetJoinedChannel(channel);
 
-            client.SendMessage(joined, $"{chatMessage.Message} - {chatMessage.Username}@{chatMessage.Channel}");
+            string originalMessage = chatMessage.Message;
+            string newMessage = originalMessage;
+
+            string postMessage = $" - {chatMessage.Username} from @{chatMessage.Channel}'s channel";
+
+            var maxLength = 400;
+
+            if (originalMessage.Length > maxLength - postMessage.Length)
+            {
+                newMessage = originalMessage.Substring(0, maxLength - postMessage.Length + 3) + "...";
+            }
+
+            string message = newMessage + postMessage;
+
+            logger.LogTrace($"Going to echo message to channel {channel} {message}");
+
+            client.SendMessage(joined, message);
         }
 
         private ICollection<string> Get(ICollection<string> collection)
