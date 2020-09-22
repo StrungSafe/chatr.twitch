@@ -25,6 +25,9 @@
 
                 services.Configure<BotConfig>(context.Configuration.GetSection(nameof(BotConfig)));
                 services.AddHostedService<Bot>();
+
+                services.Configure<DiscordBotConfig>(context.Configuration.GetSection($"{nameof(BotConfig)}:{nameof(DiscordBotConfig)}"));
+                services.AddHostedService<DiscordBot>();
             });
         }
     }
