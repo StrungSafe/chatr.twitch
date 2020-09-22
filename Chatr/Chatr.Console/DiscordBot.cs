@@ -48,6 +48,7 @@
                 twitchClient = new TwitchClient(protocol: ClientProtocol.TCP);
                 var credentials = new ConnectionCredentials(botConfig.Name, botConfig.Token);
                 twitchClient.Initialize(credentials);
+                twitchClient.Connect();
                 twitchClient.JoinChannel(botConfig.Channel);
 
                 client.MessageReceived += HandleMessageReceived;
@@ -61,6 +62,9 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            twitchClient.Disconnect();
+            twitchClient = null;
+
             await client.StopAsync();
             client.Dispose();
             client = null;
@@ -81,10 +85,31 @@
 
             if (message.Channel.Name == discordConfig.Channel)
             {
-                twitchClient.SendMessage(botConfig.Channel, message.Content);
+                SendMessage(message);
             }
 
             await Task.Delay(0);
+        }
+
+        private void SendMessage(SocketUserMessage message)
+        {
+            JoinedChannel joined = twitchClient.GetJoinedChannel(botConfig.Channel);
+
+            string originalMessage = message.Content;
+            string newMessage = originalMessage;
+
+            string postMessage = $" - {message.Author.Username} from Discord";
+
+            var maxLength = 400;
+
+            if (originalMessage.Length > maxLength - postMessage.Length)
+            {
+                newMessage = originalMessage.Substring(0, maxLength - postMessage.Length + 3) + "...";
+            }
+
+            string newerMessage = newMessage + postMessage;
+
+            twitchClient.SendMessage(joined, newerMessage);
         }
     }
 }
