@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Timers;
 using Chatr.Console.Contracts;
-using Chatr.Console.Enums;
 using TwitchLib.Client.Interfaces;
-using TwitchLib.Client.Models;
 
 namespace Chatr.Console.BotTimers
 {
