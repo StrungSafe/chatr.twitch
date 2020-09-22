@@ -94,14 +94,14 @@
 
         private void Client_OnChatCommandReceived(object sender, OnChatCommandReceivedArgs onChatCommandReceivedArgs)
         {
+            logger.LogDebug("Command received");
+
             if (ShouldIgnore(config.IgnoreCommandFrom, onChatCommandReceivedArgs.Command.ChatMessage,
                 out string username))
             {
                 logger.LogDebug($"Ignoring command from {username}");
                 return;
             }
-
-            logger.LogDebug("Command received");
 
             if (string.Equals(onChatCommandReceivedArgs.Command.ChatMessage.Channel, config.Channel))
             {
@@ -118,7 +118,8 @@
                 return;
             }
 
-            if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel))
+            if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel)
+                || config.Channel == onMessageReceivedArgs.ChatMessage.Channel)
             {
                 if (onMessageReceivedArgs.ChatMessage.Message.StartsWith(commandIdentifier)
                     && !config.KeepCommandsSynced)
@@ -167,9 +168,17 @@
 
         private void Echo(string channel, ChatMessage chatMessage)
         {
+            if (chatMessage.Channel == channel)
+            {
+                logger.LogDebug($"Not going to echo message back to channel {channel}");
+                return;
+            }
+
+            logger.LogTrace($"Going to echo message to channel {channel} {chatMessage.Message}");
+
             JoinedChannel joined = client.GetJoinedChannel(channel);
 
-            client.SendMessage(joined, $"{chatMessage.Username}@{chatMessage.Channel} - {chatMessage.Message}");
+            client.SendMessage(joined, $"{chatMessage.Message} - {chatMessage.Username}@{chatMessage.Channel}");
         }
 
         private ICollection<string> Get(ICollection<string> collection)
