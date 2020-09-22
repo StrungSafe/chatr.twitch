@@ -62,3 +62,4 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
 * Can use https://twitchapps.com/tmi/ to create an oauth token
 * Seems we must use TCP vs WebSockets, should confirm
 * We are setup to only respond to commands from the streamer's channel
+* 500 max message size
