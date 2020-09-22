@@ -1,47 +1,54 @@
 ﻿namespace Chatr.Console
 {
     using System;
-    using System.Diagnostics;
     using System.Threading;
     using System.Threading.Tasks;
 
     using Discord;
-    using Discord.Commands;
     using Discord.WebSocket;
 
-
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
 
-    public class DiscordBot : IHostedService
+    using TwitchLib.Client;
+    using TwitchLib.Client.Enums;
+    using TwitchLib.Client.Interfaces;
+    using TwitchLib.Client.Models;
+
+    internal class DiscordBot : IHostedService
     {
-        private readonly IConfiguration configuration;
+        private readonly BotConfig botConfig;
 
-        private readonly IHostEnvironment environment;
+        private readonly DiscordBotConfig discordConfig;
 
         private readonly ILogger logger;
 
         private DiscordSocketClient client;
 
-        public DiscordBot(IConfiguration configuration, ILogger<DiscordBot> logger,
-                   IHostEnvironment environment)
+        private ITwitchClient twitchClient;
+
+        public DiscordBot(ILogger<DiscordBot> logger, IOptions<BotConfig> botConfig,
+                          IOptions<DiscordBotConfig> discordConfig)
         {
-            this.configuration = configuration;
             this.logger = logger;
-            this.environment = environment;
+            this.botConfig = botConfig.Value;
+            this.discordConfig = discordConfig.Value;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
-                LogStartup();
-                await commandService.AddModulesAsync();
                 client = new DiscordSocketClient();
-                string token = GetToken();
+                string token = discordConfig.Token;
                 await client.LoginAsync(TokenType.Bot, token);
                 await client.StartAsync();
+
+                twitchClient = new TwitchClient(protocol: ClientProtocol.TCP);
+                var credentials = new ConnectionCredentials(botConfig.Name, botConfig.Token);
+                twitchClient.Initialize(credentials);
+                twitchClient.JoinChannel(botConfig.Channel);
 
                 client.MessageReceived += HandleMessageReceived;
             }
@@ -59,11 +66,6 @@
             client = null;
         }
 
-        private string GetToken()
-        {
-            return configuration.GetSection("AppSettings")["Token"];
-        }
-
         private async Task HandleMessageReceived(SocketMessage rawMessage)
         {
             // Ignore system messages and messages from bots
@@ -77,52 +79,12 @@
                 return;
             }
 
-            var commandContext = new SocketCommandContext(client, message);
-
-            var argumentPosition = 0;
-            if (!message.HasMentionPrefix(client.CurrentUser, ref argumentPosition))
+            if (message.Channel.Name == discordConfig.Channel)
             {
-                // The message @Bot will come as <@{Id}> but client.CurrentUser.Mention is <@!{Id}>
-                // So to be safe check for both in case it is changed...
-                if (message.Content.Equals(client.CurrentUser.Mention)
-                    || message.Content.Equals(client.CurrentUser.Mention.Replace("!", string.Empty)))
-                {
-                    IResult defaultResponseResult =
-                        await commandService.ExecuteDefaultResponse(commandContext, argumentPosition);
-                    await LogErrorResult(commandContext, defaultResponseResult);
-                }
-
-                argumentPosition = 0;
-                if (!message.HasCharPrefix('!', ref argumentPosition))
-                {
-                    // Not going to respond
-                    return;
-                }
+                twitchClient.SendMessage(botConfig.Channel, message.Content);
             }
 
-            IResult result = await commandService.ExecuteAsync(commandContext, argumentPosition);
-
-            await LogErrorResult(commandContext, result);
-        }
-
-        private void LogEnvironment()
-        {
-            logger.LogInformation("Hosting environment: {environment} PID: {PID}", environment.EnvironmentName,
-                Process.GetCurrentProcess().Id);
-        }
-
-        private async Task LogErrorResult(SocketCommandContext commandContext, IResult result)
-        {
-            if (result.Error.HasValue && result.Error.Value != CommandError.UnknownCommand)
-            {
-                await commandContext.Channel.SendMessageAsync(result.ToString());
-            }
-        }
-
-        private void LogStartup()
-        {
-            logger.LogInformation("Bot starting");
-            LogEnvironment();
+            await Task.Delay(0);
         }
     }
 }
