@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
-
-namespace Chatr.Console
+﻿namespace Chatr.Console
 {
+    using System.Collections.Generic;
+
     public class BotTimerConfig
     {
-        public int Interval { get; set; }
-        public int MinInterval { get; set; }
-        public int MaxInterval { get; set; }
         public ICollection<string> Commands { get; set; }
+
+        public int Interval { get; set; }
+
+        public int MaxInterval { get; set; }
+
+        public int MinInterval { get; set; }
+
         public string Type { get; set; }
     }
 }

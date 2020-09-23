@@ -5,6 +5,9 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using Chatr.Console.BotTimers;
+
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -15,17 +18,15 @@
     using TwitchLib.Client.Interfaces;
     using TwitchLib.Client.Models;
 
-    using Chatr.Console.BotTimers;
-
     internal class Bot : IHostedService
     {
         private const char commandIdentifier = '!';
 
         private readonly BotConfig config;
 
-        private readonly List<BotTimerHandler> timerHandlers;
-
         private readonly ILogger logger;
+
+        private readonly List<BotTimerHandler> timerHandlers;
 
         private ITwitchClient client;
 
@@ -35,7 +36,7 @@
         {
             this.config = config.Value;
             this.logger = logger;
-            this.timerHandlers = new List<BotTimerHandler>();
+            timerHandlers = new List<BotTimerHandler>();
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -94,10 +95,11 @@
 
             client = null;
 
-            foreach(var timerHandler in timerHandlers)
+            foreach (BotTimerHandler timerHandler in timerHandlers)
             {
                 timerHandler.Dispose();
             }
+
             timerHandlers.Clear();
 
             logger.LogInformation("Bot disposed");

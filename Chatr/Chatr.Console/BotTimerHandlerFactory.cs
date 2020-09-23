@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Chatr.Console.BotTimers;
-using Microsoft.Extensions.Logging;
-using TwitchLib.Client.Interfaces;
-
-namespace Chatr.Console
+﻿namespace Chatr.Console
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Chatr.Console.BotTimers;
+
+    using Microsoft.Extensions.Logging;
+
+    using TwitchLib.Client.Interfaces;
+
     public static class BotTimerHandlerFactory
     {
-        public static void Create(List<BotTimerHandler> timerHandlers, ICollection<BotTimerConfig> timerConfigs, ITwitchClient client, string channel, ILogger logger)
+        public static void Create(List<BotTimerHandler> timerHandlers, ICollection<BotTimerConfig> timerConfigs,
+                                  ITwitchClient client, string channel, ILogger logger)
         {
-            foreach (var timerConfig in timerConfigs)
+            foreach (BotTimerConfig timerConfig in timerConfigs)
             {
                 try
                 {

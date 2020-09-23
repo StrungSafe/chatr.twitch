@@ -1,32 +1,45 @@
-﻿using System;
-using System.Timers;
-using Chatr.Console.Contracts;
-using TwitchLib.Client.Interfaces;
-
-namespace Chatr.Console.BotTimers
+﻿namespace Chatr.Console.BotTimers
 {
+    using System;
+    using System.Timers;
+
+    using Chatr.Console.Contracts;
+
+    using TwitchLib.Client.Interfaces;
+
     public class BotTimerHandler : IDisposable
     {
         private readonly IBotTimer _botTimer;
 
-        private Timer timer;
+        private readonly string channel;
 
         private readonly ITwitchClient client;
 
-        private readonly string channel;
-
         private bool disposed;
+
+        private Timer timer;
 
         public BotTimerHandler(ITwitchClient client, string channel, BotTimerConfig config)
         {
             this.client = client;
             this.channel = channel;
 
-            var type = Type.GetType($"Chatr.Console.BotTimers.{config.Type}");
+            Type type = Type.GetType($"Chatr.Console.BotTimers.{config.Type}");
             _botTimer = Activator.CreateInstance(type, config) as IBotTimer;
 
             timer = _botTimer.Build();
             timer.Elapsed += OnTimeElapsed;
+        }
+
+        public void Dispose()
+        {
+            if (!disposed && timer != null)
+            {
+                timer.Dispose();
+            }
+
+            disposed = true;
+            timer = null;
         }
 
         private void OnTimeElapsed(object sender, EventArgs e)
@@ -34,7 +47,7 @@ namespace Chatr.Console.BotTimers
             string command = string.Empty;
             if (_botTimer is RandomTimer)
             {
-                command = _botTimer.OnTimeElapsed(() => 
+                command = _botTimer.OnTimeElapsed(() =>
                 {
                     timer.Dispose();
                     timer = _botTimer.Build();
@@ -45,22 +58,13 @@ namespace Chatr.Console.BotTimers
             {
                 command = _botTimer.OnTimeElapsed();
             }
+
             SendMessage(command);
         }
 
         private void SendMessage(string commandMessage)
         {
             client.SendMessage(channel, commandMessage);
-        }
-
-        public void Dispose()
-        {
-            if (!disposed && timer != null)
-            {
-                timer.Dispose();
-            }
-            disposed = true;
-            timer = null;
         }
     }
 }

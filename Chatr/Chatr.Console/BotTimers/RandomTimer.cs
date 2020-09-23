@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Timers;
-using Chatr.Console.Contracts;
-using Chatr.Console.Extensions;
-
-namespace Chatr.Console.BotTimers
+﻿namespace Chatr.Console.BotTimers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Timers;
+
+    using Chatr.Console.Contracts;
+    using Chatr.Console.Extensions;
+
     public class RandomTimer : IBotTimer
     {
-        private readonly int minIntervalValue;
-        private readonly int maxIntervalValue;
+        private readonly ICollection<string> commands;
 
         private readonly Random intervalRandomizer;
 
-        private readonly ICollection<string> commands;
+        private readonly int maxIntervalValue;
+
+        private readonly int minIntervalValue;
 
         public RandomTimer(BotTimerConfig config)
         {
-            this.minIntervalValue = config.MinInterval;
-            this.maxIntervalValue = config.MaxInterval;
-            this.intervalRandomizer = new Random();
-            this.commands = config.Commands;
+            minIntervalValue = config.MinInterval;
+            maxIntervalValue = config.MaxInterval;
+            intervalRandomizer = new Random();
+            commands = config.Commands;
         }
 
         public Timer Build()
@@ -33,12 +33,7 @@ namespace Chatr.Console.BotTimers
             }
 
             int randomInterval = intervalRandomizer.Next(minIntervalValue, maxIntervalValue);
-            return new Timer()
-            {
-                Interval = randomInterval,
-                AutoReset = false,
-                Enabled = true,
-            };
+            return new Timer { Interval = randomInterval, AutoReset = false, Enabled = true };
         }
 
         public string OnTimeElapsed(Action extraActionToPerform = null)
