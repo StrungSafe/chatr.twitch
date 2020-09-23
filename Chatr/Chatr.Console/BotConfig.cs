@@ -21,5 +21,7 @@
         public ICollection<string> Sources { get; set; } = new List<string>();
 
         public string Token { get; set; }
+
+        public ICollection<BotTimerConfig> Timers { get; set; }
     }
 }
