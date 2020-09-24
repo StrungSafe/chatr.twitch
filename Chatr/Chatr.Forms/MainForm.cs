@@ -125,5 +125,34 @@
         {
             await Stop();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DiscordEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DiscordEnabledCheckBox.Checked)
+            {
+                DiscordChannelTextBox.Enabled = true;
+                DiscordTokenTextBox.Enabled = true;
+            }
+            else
+            {
+                DiscordChannelTextBox.Enabled = false;
+                DiscordTokenTextBox.Enabled = false;
+            }
+        }
+
+        private void IgnoreChatFromAddButton_Click(object sender, EventArgs e)
+        {
+            HandleAddToListBox(IgnoreChatFromListBox, IgnoreChatFromTextBox);
+        }
+
+        private void IgnoreFromCommandsAddButton_Click(object sender, EventArgs e)
+        {
+            HandleAddToListBox(IgnoreCommandsFromListBox, IgnoreCommandsFromTextBox);
+        }
     }
 }
