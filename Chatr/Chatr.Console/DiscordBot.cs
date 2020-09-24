@@ -38,6 +38,12 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            if (!discordConfig.Enabled) 
+            {
+                logger.LogInformation("Discord Bot is disabled");
+                return;
+            }
+
             try
             {
                 client = new DiscordSocketClient();
@@ -62,11 +68,11 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            twitchClient.Disconnect();
+            twitchClient?.Disconnect();
             twitchClient = null;
 
-            await client.StopAsync();
-            client.Dispose();
+            await client?.StopAsync();
+            client?.Dispose();
             client = null;
         }
 

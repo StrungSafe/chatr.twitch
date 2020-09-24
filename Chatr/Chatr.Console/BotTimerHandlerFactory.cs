@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using Chatr.Console.BotTimers;
 
     using Microsoft.Extensions.Logging;
@@ -14,7 +14,7 @@
         public static void Create(List<BotTimerHandler> timerHandlers, ICollection<BotTimerConfig> timerConfigs,
                                   ITwitchClient client, string channel, ILogger logger)
         {
-            foreach (BotTimerConfig timerConfig in timerConfigs)
+            foreach (BotTimerConfig timerConfig in timerConfigs ?? Enumerable.Empty<BotTimerConfig>())
             {
                 try
                 {
