@@ -45,7 +45,24 @@ The intention of this bot is to provide a way to merge twitch chats while a stre
     ],
     "ignoreCommandFrom": [
       "ignore1"
+    ],
+    "timers": [
+        {
+            "interval": 0,
+            "minInterval": 0,
+            "maxInterval": 0,
+            "commands": [
+                "command1"
+            ],
+            "type": "<BasicTimer, RandomTimer>"
+        }
     ]
+},
+
+"DiscordBotConfig": {
+    "token": "token",
+    "channel": "channel",
+    "enabled": false,
 },
 ```
 
