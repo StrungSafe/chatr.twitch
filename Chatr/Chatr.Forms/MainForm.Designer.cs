@@ -32,12 +32,12 @@
             this.StopButton = new System.Windows.Forms.Button();
             this.TwitchGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.IgnoreCommandsFromDeleteButton = new System.Windows.Forms.Button();
             this.IgnoreCommandsFromTextBox = new System.Windows.Forms.TextBox();
             this.IgnoreCommandsFromAddButton = new System.Windows.Forms.Button();
             this.IgnoreCommandsFromListBox = new System.Windows.Forms.CheckedListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.IgnoreChatFromDeleteButton = new System.Windows.Forms.Button();
             this.IgnoreChatFromTextBox = new System.Windows.Forms.TextBox();
             this.IgnoreChatFromAddButton = new System.Windows.Forms.Button();
             this.IgnoreChatFromListBox = new System.Windows.Forms.CheckedListBox();
@@ -73,23 +73,26 @@
             // 
             // StartButton
             // 
+            this.StartButton.BackColor = System.Drawing.Color.Green;
+            this.StartButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.StartButton.Location = new System.Drawing.Point(813, 12);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(94, 199);
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Start";
-            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.UseVisualStyleBackColor = false;
             this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // StopButton
             // 
+            this.StopButton.BackColor = System.Drawing.Color.Red;
             this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(819, 398);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(94, 128);
             this.StopButton.TabIndex = 1;
             this.StopButton.Text = "Stop";
-            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.UseVisualStyleBackColor = false;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // TwitchGroupBox
@@ -113,7 +116,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.IgnoreCommandsFromDeleteButton);
             this.groupBox2.Controls.Add(this.IgnoreCommandsFromTextBox);
             this.groupBox2.Controls.Add(this.IgnoreCommandsFromAddButton);
             this.groupBox2.Controls.Add(this.IgnoreCommandsFromListBox);
@@ -124,14 +127,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ignore Commands From";
             // 
-            // button3
+            // IgnoreCommandsFromDeleteButton
             // 
-            this.button3.Location = new System.Drawing.Point(189, 55);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
+            this.IgnoreCommandsFromDeleteButton.Location = new System.Drawing.Point(189, 55);
+            this.IgnoreCommandsFromDeleteButton.Name = "IgnoreCommandsFromDeleteButton";
+            this.IgnoreCommandsFromDeleteButton.Size = new System.Drawing.Size(105, 23);
+            this.IgnoreCommandsFromDeleteButton.TabIndex = 14;
+            this.IgnoreCommandsFromDeleteButton.Text = "Delete";
+            this.IgnoreCommandsFromDeleteButton.UseVisualStyleBackColor = true;
+            this.IgnoreCommandsFromDeleteButton.Click += new System.EventHandler(this.IgnoreCommandsFromDeleteButton_Click);
             // 
             // IgnoreCommandsFromTextBox
             // 
@@ -160,7 +164,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.IgnoreChatFromDeleteButton);
             this.groupBox1.Controls.Add(this.IgnoreChatFromTextBox);
             this.groupBox1.Controls.Add(this.IgnoreChatFromAddButton);
             this.groupBox1.Controls.Add(this.IgnoreChatFromListBox);
@@ -170,16 +174,16 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ignore Chat From";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // button1
+            // IgnoreChatFromDeleteButton
             // 
-            this.button1.Location = new System.Drawing.Point(189, 55);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = true;
+            this.IgnoreChatFromDeleteButton.Location = new System.Drawing.Point(189, 55);
+            this.IgnoreChatFromDeleteButton.Name = "IgnoreChatFromDeleteButton";
+            this.IgnoreChatFromDeleteButton.Size = new System.Drawing.Size(105, 23);
+            this.IgnoreChatFromDeleteButton.TabIndex = 14;
+            this.IgnoreChatFromDeleteButton.Text = "Delete";
+            this.IgnoreChatFromDeleteButton.UseVisualStyleBackColor = true;
+            this.IgnoreChatFromDeleteButton.Click += new System.EventHandler(this.IgnoreChatFromDeleteButton_Click);
             // 
             // IgnoreChatFromTextBox
             // 
@@ -467,12 +471,12 @@
         private System.Windows.Forms.Button DeleteSourcesButton;
         private System.Windows.Forms.Button DeleteDestinationsButton;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button IgnoreCommandsFromDeleteButton;
         private System.Windows.Forms.TextBox IgnoreCommandsFromTextBox;
         private System.Windows.Forms.Button IgnoreCommandsFromAddButton;
         private System.Windows.Forms.CheckedListBox IgnoreCommandsFromListBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button IgnoreChatFromDeleteButton;
         private System.Windows.Forms.TextBox IgnoreChatFromTextBox;
         private System.Windows.Forms.Button IgnoreChatFromAddButton;
         private System.Windows.Forms.CheckedListBox IgnoreChatFromListBox;
