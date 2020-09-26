@@ -31,22 +31,22 @@
             this.StartButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.TwitchGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.IgnoreCommandsFromGroupBox = new System.Windows.Forms.GroupBox();
             this.IgnoreCommandsFromDeleteButton = new System.Windows.Forms.Button();
             this.IgnoreCommandsFromTextBox = new System.Windows.Forms.TextBox();
             this.IgnoreCommandsFromAddButton = new System.Windows.Forms.Button();
             this.IgnoreCommandsFromListBox = new System.Windows.Forms.CheckedListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.IgnoreChatFromGroupBox = new System.Windows.Forms.GroupBox();
             this.IgnoreChatFromDeleteButton = new System.Windows.Forms.Button();
             this.IgnoreChatFromTextBox = new System.Windows.Forms.TextBox();
             this.IgnoreChatFromAddButton = new System.Windows.Forms.Button();
             this.IgnoreChatFromListBox = new System.Windows.Forms.CheckedListBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.DestinationsGroupBox = new System.Windows.Forms.GroupBox();
             this.DeleteDestinationsButton = new System.Windows.Forms.Button();
             this.DestinationTextBox = new System.Windows.Forms.TextBox();
             this.AddDestinationButton = new System.Windows.Forms.Button();
             this.DestinationsCheckedListBox = new System.Windows.Forms.CheckedListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.SourcesGroupBox = new System.Windows.Forms.GroupBox();
             this.DeleteSourcesButton = new System.Windows.Forms.Button();
             this.SourceTextBox = new System.Windows.Forms.TextBox();
             this.AddSourceButton = new System.Windows.Forms.Button();
@@ -54,20 +54,20 @@
             this.TwitchChannelTextBox = new System.Windows.Forms.TextBox();
             this.TwitchTokenTextBox = new System.Windows.Forms.TextBox();
             this.TwitchNameTextBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.TwitchChannelLabel = new System.Windows.Forms.Label();
+            this.TwitchTokenLabel = new System.Windows.Forms.Label();
+            this.TwitchNameLabel = new System.Windows.Forms.Label();
             this.DiscordGroupBox = new System.Windows.Forms.GroupBox();
             this.DiscordEnabledCheckBox = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.DiscordChannelLabel = new System.Windows.Forms.Label();
+            this.DiscordTokenLabel = new System.Windows.Forms.Label();
             this.DiscordChannelTextBox = new System.Windows.Forms.TextBox();
             this.DiscordTokenTextBox = new System.Windows.Forms.TextBox();
             this.TwitchGroupBox.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.IgnoreCommandsFromGroupBox.SuspendLayout();
+            this.IgnoreChatFromGroupBox.SuspendLayout();
+            this.DestinationsGroupBox.SuspendLayout();
+            this.SourcesGroupBox.SuspendLayout();
             this.DiscordGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,16 +97,16 @@
             // 
             // TwitchGroupBox
             // 
-            this.TwitchGroupBox.Controls.Add(this.groupBox2);
-            this.TwitchGroupBox.Controls.Add(this.groupBox1);
-            this.TwitchGroupBox.Controls.Add(this.groupBox4);
-            this.TwitchGroupBox.Controls.Add(this.groupBox3);
+            this.TwitchGroupBox.Controls.Add(this.IgnoreCommandsFromGroupBox);
+            this.TwitchGroupBox.Controls.Add(this.IgnoreChatFromGroupBox);
+            this.TwitchGroupBox.Controls.Add(this.DestinationsGroupBox);
+            this.TwitchGroupBox.Controls.Add(this.SourcesGroupBox);
             this.TwitchGroupBox.Controls.Add(this.TwitchChannelTextBox);
             this.TwitchGroupBox.Controls.Add(this.TwitchTokenTextBox);
             this.TwitchGroupBox.Controls.Add(this.TwitchNameTextBox);
-            this.TwitchGroupBox.Controls.Add(this.label5);
-            this.TwitchGroupBox.Controls.Add(this.label4);
-            this.TwitchGroupBox.Controls.Add(this.label3);
+            this.TwitchGroupBox.Controls.Add(this.TwitchChannelLabel);
+            this.TwitchGroupBox.Controls.Add(this.TwitchTokenLabel);
+            this.TwitchGroupBox.Controls.Add(this.TwitchNameLabel);
             this.TwitchGroupBox.Location = new System.Drawing.Point(12, 12);
             this.TwitchGroupBox.Name = "TwitchGroupBox";
             this.TwitchGroupBox.Size = new System.Drawing.Size(795, 362);
@@ -114,18 +114,18 @@
             this.TwitchGroupBox.TabStop = false;
             this.TwitchGroupBox.Text = "Twitch";
             // 
-            // groupBox2
+            // IgnoreCommandsFromGroupBox
             // 
-            this.groupBox2.Controls.Add(this.IgnoreCommandsFromDeleteButton);
-            this.groupBox2.Controls.Add(this.IgnoreCommandsFromTextBox);
-            this.groupBox2.Controls.Add(this.IgnoreCommandsFromAddButton);
-            this.groupBox2.Controls.Add(this.IgnoreCommandsFromListBox);
-            this.groupBox2.Location = new System.Drawing.Point(478, 189);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(303, 161);
-            this.groupBox2.TabIndex = 14;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ignore Commands From";
+            this.IgnoreCommandsFromGroupBox.Controls.Add(this.IgnoreCommandsFromDeleteButton);
+            this.IgnoreCommandsFromGroupBox.Controls.Add(this.IgnoreCommandsFromTextBox);
+            this.IgnoreCommandsFromGroupBox.Controls.Add(this.IgnoreCommandsFromAddButton);
+            this.IgnoreCommandsFromGroupBox.Controls.Add(this.IgnoreCommandsFromListBox);
+            this.IgnoreCommandsFromGroupBox.Location = new System.Drawing.Point(478, 189);
+            this.IgnoreCommandsFromGroupBox.Name = "IgnoreCommandsFromGroupBox";
+            this.IgnoreCommandsFromGroupBox.Size = new System.Drawing.Size(303, 161);
+            this.IgnoreCommandsFromGroupBox.TabIndex = 14;
+            this.IgnoreCommandsFromGroupBox.TabStop = false;
+            this.IgnoreCommandsFromGroupBox.Text = "Ignore Commands From";
             // 
             // IgnoreCommandsFromDeleteButton
             // 
@@ -162,18 +162,18 @@
             this.IgnoreCommandsFromListBox.Size = new System.Drawing.Size(177, 94);
             this.IgnoreCommandsFromListBox.TabIndex = 10;
             // 
-            // groupBox1
+            // IgnoreChatFromGroupBox
             // 
-            this.groupBox1.Controls.Add(this.IgnoreChatFromDeleteButton);
-            this.groupBox1.Controls.Add(this.IgnoreChatFromTextBox);
-            this.groupBox1.Controls.Add(this.IgnoreChatFromAddButton);
-            this.groupBox1.Controls.Add(this.IgnoreChatFromListBox);
-            this.groupBox1.Location = new System.Drawing.Point(169, 189);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(303, 161);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Ignore Chat From";
+            this.IgnoreChatFromGroupBox.Controls.Add(this.IgnoreChatFromDeleteButton);
+            this.IgnoreChatFromGroupBox.Controls.Add(this.IgnoreChatFromTextBox);
+            this.IgnoreChatFromGroupBox.Controls.Add(this.IgnoreChatFromAddButton);
+            this.IgnoreChatFromGroupBox.Controls.Add(this.IgnoreChatFromListBox);
+            this.IgnoreChatFromGroupBox.Location = new System.Drawing.Point(169, 189);
+            this.IgnoreChatFromGroupBox.Name = "IgnoreChatFromGroupBox";
+            this.IgnoreChatFromGroupBox.Size = new System.Drawing.Size(303, 161);
+            this.IgnoreChatFromGroupBox.TabIndex = 14;
+            this.IgnoreChatFromGroupBox.TabStop = false;
+            this.IgnoreChatFromGroupBox.Text = "Ignore Chat From";
             // 
             // IgnoreChatFromDeleteButton
             // 
@@ -210,18 +210,18 @@
             this.IgnoreChatFromListBox.Size = new System.Drawing.Size(177, 94);
             this.IgnoreChatFromListBox.TabIndex = 10;
             // 
-            // groupBox4
+            // DestinationsGroupBox
             // 
-            this.groupBox4.Controls.Add(this.DeleteDestinationsButton);
-            this.groupBox4.Controls.Add(this.DestinationTextBox);
-            this.groupBox4.Controls.Add(this.AddDestinationButton);
-            this.groupBox4.Controls.Add(this.DestinationsCheckedListBox);
-            this.groupBox4.Location = new System.Drawing.Point(478, 22);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(303, 161);
-            this.groupBox4.TabIndex = 14;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Destinations";
+            this.DestinationsGroupBox.Controls.Add(this.DeleteDestinationsButton);
+            this.DestinationsGroupBox.Controls.Add(this.DestinationTextBox);
+            this.DestinationsGroupBox.Controls.Add(this.AddDestinationButton);
+            this.DestinationsGroupBox.Controls.Add(this.DestinationsCheckedListBox);
+            this.DestinationsGroupBox.Location = new System.Drawing.Point(478, 22);
+            this.DestinationsGroupBox.Name = "DestinationsGroupBox";
+            this.DestinationsGroupBox.Size = new System.Drawing.Size(303, 161);
+            this.DestinationsGroupBox.TabIndex = 14;
+            this.DestinationsGroupBox.TabStop = false;
+            this.DestinationsGroupBox.Text = "Destinations";
             // 
             // DeleteDestinationsButton
             // 
@@ -246,7 +246,7 @@
             this.AddDestinationButton.Name = "AddDestinationButton";
             this.AddDestinationButton.Size = new System.Drawing.Size(105, 23);
             this.AddDestinationButton.TabIndex = 13;
-            this.AddDestinationButton.Text = "Add Destination";
+            this.AddDestinationButton.Text = "Add";
             this.AddDestinationButton.UseVisualStyleBackColor = true;
             this.AddDestinationButton.Click += new System.EventHandler(this.AddDestinationButton_Click);
             // 
@@ -258,18 +258,18 @@
             this.DestinationsCheckedListBox.Size = new System.Drawing.Size(177, 94);
             this.DestinationsCheckedListBox.TabIndex = 10;
             // 
-            // groupBox3
+            // SourcesGroupBox
             // 
-            this.groupBox3.Controls.Add(this.DeleteSourcesButton);
-            this.groupBox3.Controls.Add(this.SourceTextBox);
-            this.groupBox3.Controls.Add(this.AddSourceButton);
-            this.groupBox3.Controls.Add(this.SourcesCheckedListBox);
-            this.groupBox3.Location = new System.Drawing.Point(169, 22);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(303, 161);
-            this.groupBox3.TabIndex = 14;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Sources";
+            this.SourcesGroupBox.Controls.Add(this.DeleteSourcesButton);
+            this.SourcesGroupBox.Controls.Add(this.SourceTextBox);
+            this.SourcesGroupBox.Controls.Add(this.AddSourceButton);
+            this.SourcesGroupBox.Controls.Add(this.SourcesCheckedListBox);
+            this.SourcesGroupBox.Location = new System.Drawing.Point(169, 22);
+            this.SourcesGroupBox.Name = "SourcesGroupBox";
+            this.SourcesGroupBox.Size = new System.Drawing.Size(303, 161);
+            this.SourcesGroupBox.TabIndex = 14;
+            this.SourcesGroupBox.TabStop = false;
+            this.SourcesGroupBox.Text = "Sources";
             // 
             // DeleteSourcesButton
             // 
@@ -294,7 +294,7 @@
             this.AddSourceButton.Name = "AddSourceButton";
             this.AddSourceButton.Size = new System.Drawing.Size(105, 23);
             this.AddSourceButton.TabIndex = 13;
-            this.AddSourceButton.Text = "Add Source";
+            this.AddSourceButton.Text = "Add";
             this.AddSourceButton.UseVisualStyleBackColor = true;
             this.AddSourceButton.Click += new System.EventHandler(this.AddSourceButton_Click);
             // 
@@ -327,38 +327,38 @@
             this.TwitchNameTextBox.Size = new System.Drawing.Size(100, 23);
             this.TwitchNameTextBox.TabIndex = 7;
             // 
-            // label5
+            // TwitchChannelLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 77);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 15);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Channel";
+            this.TwitchChannelLabel.AutoSize = true;
+            this.TwitchChannelLabel.Location = new System.Drawing.Point(6, 77);
+            this.TwitchChannelLabel.Name = "TwitchChannelLabel";
+            this.TwitchChannelLabel.Size = new System.Drawing.Size(51, 15);
+            this.TwitchChannelLabel.TabIndex = 6;
+            this.TwitchChannelLabel.Text = "Channel";
             // 
-            // label4
+            // TwitchTokenLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Token";
+            this.TwitchTokenLabel.AutoSize = true;
+            this.TwitchTokenLabel.Location = new System.Drawing.Point(17, 53);
+            this.TwitchTokenLabel.Name = "TwitchTokenLabel";
+            this.TwitchTokenLabel.Size = new System.Drawing.Size(40, 15);
+            this.TwitchTokenLabel.TabIndex = 5;
+            this.TwitchTokenLabel.Text = "Token";
             // 
-            // label3
+            // TwitchNameLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Name";
+            this.TwitchNameLabel.AutoSize = true;
+            this.TwitchNameLabel.Location = new System.Drawing.Point(17, 29);
+            this.TwitchNameLabel.Name = "TwitchNameLabel";
+            this.TwitchNameLabel.Size = new System.Drawing.Size(39, 15);
+            this.TwitchNameLabel.TabIndex = 4;
+            this.TwitchNameLabel.Text = "Name";
             // 
             // DiscordGroupBox
             // 
             this.DiscordGroupBox.Controls.Add(this.DiscordEnabledCheckBox);
-            this.DiscordGroupBox.Controls.Add(this.label2);
-            this.DiscordGroupBox.Controls.Add(this.label1);
+            this.DiscordGroupBox.Controls.Add(this.DiscordChannelLabel);
+            this.DiscordGroupBox.Controls.Add(this.DiscordTokenLabel);
             this.DiscordGroupBox.Controls.Add(this.DiscordChannelTextBox);
             this.DiscordGroupBox.Controls.Add(this.DiscordTokenTextBox);
             this.DiscordGroupBox.Location = new System.Drawing.Point(18, 398);
@@ -382,23 +382,23 @@
             this.DiscordEnabledCheckBox.UseVisualStyleBackColor = true;
             this.DiscordEnabledCheckBox.CheckedChanged += new System.EventHandler(this.DiscordEnabledCheckBox_CheckedChanged);
             // 
-            // label2
+            // DiscordChannelLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 81);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Channel";
+            this.DiscordChannelLabel.AutoSize = true;
+            this.DiscordChannelLabel.Location = new System.Drawing.Point(6, 81);
+            this.DiscordChannelLabel.Name = "DiscordChannelLabel";
+            this.DiscordChannelLabel.Size = new System.Drawing.Size(51, 15);
+            this.DiscordChannelLabel.TabIndex = 7;
+            this.DiscordChannelLabel.Text = "Channel";
             // 
-            // label1
+            // DiscordTokenLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Token";
+            this.DiscordTokenLabel.AutoSize = true;
+            this.DiscordTokenLabel.Location = new System.Drawing.Point(19, 52);
+            this.DiscordTokenLabel.Name = "DiscordTokenLabel";
+            this.DiscordTokenLabel.Size = new System.Drawing.Size(40, 15);
+            this.DiscordTokenLabel.TabIndex = 6;
+            this.DiscordTokenLabel.Text = "Token";
             // 
             // DiscordChannelTextBox
             // 
@@ -430,14 +430,14 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.TwitchGroupBox.ResumeLayout(false);
             this.TwitchGroupBox.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.IgnoreCommandsFromGroupBox.ResumeLayout(false);
+            this.IgnoreCommandsFromGroupBox.PerformLayout();
+            this.IgnoreChatFromGroupBox.ResumeLayout(false);
+            this.IgnoreChatFromGroupBox.PerformLayout();
+            this.DestinationsGroupBox.ResumeLayout(false);
+            this.DestinationsGroupBox.PerformLayout();
+            this.SourcesGroupBox.ResumeLayout(false);
+            this.SourcesGroupBox.PerformLayout();
             this.DiscordGroupBox.ResumeLayout(false);
             this.DiscordGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -450,38 +450,37 @@
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.GroupBox TwitchGroupBox;
         private System.Windows.Forms.GroupBox DiscordGroupBox;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label DiscordChannelLabel;
+        private System.Windows.Forms.Label DiscordTokenLabel;
         private System.Windows.Forms.TextBox DiscordChannelTextBox;
         private System.Windows.Forms.TextBox DiscordTokenTextBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label TwitchChannelLabel;
+        private System.Windows.Forms.Label TwitchTokenLabel;
+        private System.Windows.Forms.Label TwitchNameLabel;
         private System.Windows.Forms.TextBox TwitchChannelTextBox;
         private System.Windows.Forms.TextBox TwitchTokenTextBox;
         private System.Windows.Forms.TextBox TwitchNameTextBox;
         private System.Windows.Forms.CheckedListBox SourcesCheckedListBox;
         private System.Windows.Forms.Button AddSourceButton;
         private System.Windows.Forms.TextBox SourceTextBox;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox DestinationsGroupBox;
         private System.Windows.Forms.TextBox DestinationTextBox;
         private System.Windows.Forms.Button AddDestinationButton;
         private System.Windows.Forms.CheckedListBox DestinationsCheckedListBox;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox SourcesGroupBox;
         private System.Windows.Forms.Button DeleteSourcesButton;
         private System.Windows.Forms.Button DeleteDestinationsButton;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox IgnoreCommandsFromGroupBox;
         private System.Windows.Forms.Button IgnoreCommandsFromDeleteButton;
         private System.Windows.Forms.TextBox IgnoreCommandsFromTextBox;
         private System.Windows.Forms.Button IgnoreCommandsFromAddButton;
         private System.Windows.Forms.CheckedListBox IgnoreCommandsFromListBox;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox IgnoreChatFromGroupBox;
         private System.Windows.Forms.Button IgnoreChatFromDeleteButton;
         private System.Windows.Forms.TextBox IgnoreChatFromTextBox;
         private System.Windows.Forms.Button IgnoreChatFromAddButton;
         private System.Windows.Forms.CheckedListBox IgnoreChatFromListBox;
         private System.Windows.Forms.CheckBox DiscordEnabledCheckBox;
-        private System.Windows.Forms.TextBox Ignr;
     }
 }
 
