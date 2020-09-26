@@ -38,7 +38,7 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            if (!discordConfig.Enabled) 
+            if (!discordConfig.Enabled)
             {
                 logger.LogInformation("Discord Bot is disabled");
                 return;

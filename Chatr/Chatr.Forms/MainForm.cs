@@ -51,6 +51,20 @@
             }
         }
 
+        private void DiscordEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DiscordEnabledCheckBox.Checked)
+            {
+                DiscordChannelTextBox.Enabled = true;
+                DiscordTokenTextBox.Enabled = true;
+            }
+            else
+            {
+                DiscordChannelTextBox.Enabled = false;
+                DiscordTokenTextBox.Enabled = false;
+            }
+        }
+
         private void HandleAddToListBox(CheckedListBox box, TextBox text)
         {
             if (string.IsNullOrEmpty(text.Text))
@@ -68,6 +82,38 @@
             box.Items.Add(sourceName);
 
             text.Text = string.Empty;
+        }
+
+        private void IgnoreChatFromAddButton_Click(object sender, EventArgs e)
+        {
+            HandleAddToListBox(IgnoreChatFromListBox, IgnoreChatFromTextBox);
+        }
+
+        private void IgnoreChatFromDeleteButton_Click(object sender, EventArgs e)
+        {
+            var destination = new string[IgnoreChatFromListBox.SelectedItems.Count];
+            IgnoreChatFromListBox.SelectedItems.CopyTo(destination, 0);
+
+            foreach (string selectedItem in destination)
+            {
+                IgnoreChatFromListBox.Items.Remove(selectedItem);
+            }
+        }
+
+        private void IgnoreCommandsFromDeleteButton_Click(object sender, EventArgs e)
+        {
+            var destination = new string[IgnoreCommandsFromListBox.SelectedItems.Count];
+            IgnoreCommandsFromListBox.SelectedItems.CopyTo(destination, 0);
+
+            foreach (string selectedItem in destination)
+            {
+                IgnoreCommandsFromListBox.Items.Remove(selectedItem);
+            }
+        }
+
+        private void IgnoreFromCommandsAddButton_Click(object sender, EventArgs e)
+        {
+            HandleAddToListBox(IgnoreCommandsFromListBox, IgnoreCommandsFromTextBox);
         }
 
         private async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -124,52 +170,6 @@
         private async void StopButton_Click(object sender, EventArgs e)
         {
             await Stop();
-        }
-
-        private void DiscordEnabledCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (DiscordEnabledCheckBox.Checked)
-            {
-                DiscordChannelTextBox.Enabled = true;
-                DiscordTokenTextBox.Enabled = true;
-            }
-            else
-            {
-                DiscordChannelTextBox.Enabled = false;
-                DiscordTokenTextBox.Enabled = false;
-            }
-        }
-
-        private void IgnoreChatFromAddButton_Click(object sender, EventArgs e)
-        {
-            HandleAddToListBox(IgnoreChatFromListBox, IgnoreChatFromTextBox);
-        }
-
-        private void IgnoreFromCommandsAddButton_Click(object sender, EventArgs e)
-        {
-            HandleAddToListBox(IgnoreCommandsFromListBox, IgnoreCommandsFromTextBox);
-        }
-
-        private void IgnoreChatFromDeleteButton_Click(object sender, EventArgs e)
-        {
-            var destination = new string[IgnoreChatFromListBox.SelectedItems.Count];
-            IgnoreChatFromListBox.SelectedItems.CopyTo(destination, 0);
-
-            foreach (string selectedItem in destination)
-            {
-                IgnoreChatFromListBox.Items.Remove(selectedItem);
-            }
-        }
-
-        private void IgnoreCommandsFromDeleteButton_Click(object sender, EventArgs e)
-        {
-            var destination = new string[IgnoreCommandsFromListBox.SelectedItems.Count];
-            IgnoreCommandsFromListBox.SelectedItems.CopyTo(destination, 0);
-
-            foreach (string selectedItem in destination)
-            {
-                IgnoreCommandsFromListBox.Items.Remove(selectedItem);
-            }
         }
     }
 }

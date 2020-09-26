@@ -13,12 +13,9 @@
 
         private readonly int interval;
 
-        private readonly Random random;
-
         public BasicTimer(BotTimerConfig config)
         {
             interval = config.Interval;
-            random = new Random();
             commands = config.Commands;
         }
 
