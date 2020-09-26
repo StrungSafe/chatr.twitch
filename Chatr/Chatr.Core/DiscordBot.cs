@@ -18,10 +18,6 @@
 
     public class DiscordBot : IHostedService
     {
-        private readonly BotConfig botConfig;
-
-        private readonly DiscordBotConfig discordConfig;
-
         private readonly ILogger logger;
 
         private DiscordSocketClient client;
@@ -31,8 +27,8 @@
         public DiscordBot(ILogger<DiscordBot> logger, BotConfig botConfig, DiscordBotConfig discordConfig)
         {
             this.logger = logger;
-            this.botConfig = botConfig;
-            this.discordConfig = discordConfig;
+            BotConfig = botConfig;
+            DiscordConfig = discordConfig;
         }
 
         public DiscordBot(ILogger<DiscordBot> logger, IOptions<BotConfig> botConfig,
@@ -41,9 +37,13 @@
         {
         }
 
+        public BotConfig BotConfig { get; set; }
+
+        public DiscordBotConfig DiscordConfig { get; set; }
+
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            if (!discordConfig.Enabled)
+            if (!DiscordConfig.Enabled)
             {
                 logger.LogInformation("Discord Bot is disabled and will not start");
                 return;
@@ -52,15 +52,15 @@
             try
             {
                 client = new DiscordSocketClient();
-                string token = discordConfig.Token;
+                string token = DiscordConfig.Token;
                 await client.LoginAsync(TokenType.Bot, token);
                 await client.StartAsync();
 
                 twitchClient = new TwitchClient(protocol: ClientProtocol.TCP);
-                var credentials = new ConnectionCredentials(botConfig.Name, botConfig.Token);
+                var credentials = new ConnectionCredentials(BotConfig.Name, BotConfig.Token);
                 twitchClient.Initialize(credentials);
                 twitchClient.Connect();
-                twitchClient.JoinChannel(botConfig.Channel);
+                twitchClient.JoinChannel(BotConfig.Channel);
 
                 client.MessageReceived += HandleMessageReceived;
             }
@@ -73,7 +73,7 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            if (!discordConfig.Enabled)
+            if (!DiscordConfig.Enabled)
             {
                 logger.LogInformation("Discord Bot is disabled and is already stopped");
                 return;
@@ -100,7 +100,7 @@
                 return;
             }
 
-            if (message.Channel.Name == discordConfig.Channel)
+            if (message.Channel.Name == DiscordConfig.Channel)
             {
                 SendMessage(message);
             }
@@ -110,7 +110,7 @@
 
         private void SendMessage(SocketUserMessage message)
         {
-            JoinedChannel joined = twitchClient.GetJoinedChannel(botConfig.Channel);
+            JoinedChannel joined = twitchClient.GetJoinedChannel(BotConfig.Channel);
 
             string originalMessage = message.Content;
             string newMessage = originalMessage;

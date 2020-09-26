@@ -8,6 +8,7 @@
 
     using Chatr.Core;
 
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging.Abstractions;
 
     public partial class MainForm : Form
@@ -18,8 +19,12 @@
 
         private Bot twitchBot;
 
-        public MainForm()
+        private readonly IServiceProvider serviceProvider;
+
+        public MainForm(IServiceProvider serviceProvider)
         {
+            this.serviceProvider = serviceProvider;
+
             InitializeComponent();
         }
 
@@ -139,7 +144,7 @@
 
             TwitchGroupBox.Enabled = false;
             DiscordGroupBox.Enabled = false;
-
+            
             var twitchBotConfig = new BotConfig
                                   {
                                       Name = TwitchNameTextBox.Text,
@@ -149,7 +154,9 @@
                                       Destinations = DestinationsCheckedListBox.Items.Cast<string>().ToArray(),
                                       MaxConnections = 6
                                   };
-            twitchBot = new Bot(twitchBotConfig, NullLogger<Bot>.Instance);
+            twitchBot = serviceProvider.GetRequiredService<Bot>();
+            twitchBot.Config = twitchBotConfig;
+            
             await twitchBot.StartAsync(CancellationToken.None);
 
             var discordBotConfig = new DiscordBotConfig
@@ -158,7 +165,9 @@
                                        Token = DiscordTokenTextBox.Text,
                                        Enabled = DiscordEnabledCheckBox.Checked
                                    };
-            discordBot = new DiscordBot(NullLogger<DiscordBot>.Instance, twitchBotConfig, discordBotConfig);
+            discordBot = serviceProvider.GetRequiredService<DiscordBot>();
+            discordBot.BotConfig = twitchBotConfig;
+            discordBot.DiscordConfig = discordBotConfig;
             if (DiscordEnabledCheckBox.Checked)
             {
                 await discordBot.StopAsync(CancellationToken.None);

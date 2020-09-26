@@ -20,8 +20,6 @@
     {
         private const char commandIdentifier = '!';
 
-        private readonly BotConfig config;
-
         private readonly ILogger logger;
 
         private readonly List<BotTimerHandler> timerHandlers;
@@ -32,7 +30,7 @@
 
         public Bot(BotConfig config, ILogger<Bot> logger)
         {
-            this.config = config;
+            Config = config;
             this.logger = logger;
             timerHandlers = new List<BotTimerHandler>();
         }
@@ -42,6 +40,8 @@
         {
         }
 
+        public BotConfig Config { get; set; }
+
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             if (disposed)
@@ -50,12 +50,12 @@
                     "This class is already disposed of, create a new instance first");
             }
 
-            string username = config.Name;
-            string token = config.Token;
-            string channel = config.Channel;
-            ICollection<string> sources = Get(config.Sources);
-            ICollection<string> destinations = Get(config.Destinations);
-            ICollection<BotTimerConfig> timerConfigs = config.Timers;
+            string username = Config.Name;
+            string token = Config.Token;
+            string channel = Config.Channel;
+            ICollection<string> sources = Get(Config.Sources);
+            ICollection<string> destinations = Get(Config.Destinations);
+            ICollection<BotTimerConfig> timerConfigs = Config.Timers;
 
             logger.LogInformation("Initializing twitch client");
 
@@ -114,33 +114,33 @@
         {
             logger.LogDebug("Command received");
 
-            if (ShouldIgnore(config.IgnoreCommandFrom, onChatCommandReceivedArgs.Command.ChatMessage,
+            if (ShouldIgnore(Config.IgnoreCommandFrom, onChatCommandReceivedArgs.Command.ChatMessage,
                 out string username))
             {
                 logger.LogDebug($"Ignoring command from {username}");
                 return;
             }
 
-            if (string.Equals(onChatCommandReceivedArgs.Command.ChatMessage.Channel, config.Channel))
+            if (string.Equals(onChatCommandReceivedArgs.Command.ChatMessage.Channel, Config.Channel))
             {
                 logger.LogDebug("Received a command we want to handle");
-                client.SendMessage(config.Channel, "beep boop");
+                client.SendMessage(Config.Channel, "beep boop");
             }
         }
 
         private void Client_OnMessageReceived(object sender, OnMessageReceivedArgs onMessageReceivedArgs)
         {
-            if (ShouldIgnore(config.IgnoreChatFrom, onMessageReceivedArgs.ChatMessage, out string username))
+            if (ShouldIgnore(Config.IgnoreChatFrom, onMessageReceivedArgs.ChatMessage, out string username))
             {
                 logger.LogDebug($"Ignoring message from {username}");
                 return;
             }
 
-            if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel)
-                || config.Channel == onMessageReceivedArgs.ChatMessage.Channel)
+            if (Config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel)
+                || Config.Channel == onMessageReceivedArgs.ChatMessage.Channel)
             {
                 if (onMessageReceivedArgs.ChatMessage.Message.StartsWith(char.ToString(commandIdentifier))
-                    && !config.KeepCommandsSynced)
+                    && !Config.KeepCommandsSynced)
                 {
                     logger.LogDebug("Not going to echo command");
                     return;
@@ -172,8 +172,8 @@
 
         private void Echo(ChatMessage chatMessage)
         {
-            Echo(config.Channel, chatMessage);
-            Echo(config.Destinations, chatMessage);
+            Echo(Config.Channel, chatMessage);
+            Echo(Config.Destinations, chatMessage);
         }
 
         private void Echo(ICollection<string> channels, ChatMessage chatMessage)
@@ -225,7 +225,7 @@
 
         private ICollection<string> GetWithMax(ICollection<string> values)
         {
-            return values.Take(config.MaxConnections).ToList();
+            return values.Take(Config.MaxConnections).ToList();
         }
 
         private bool ShouldIgnore(ICollection<string> ignoreFrom, ChatMessage chatMessage, out string username)
