@@ -28,12 +28,17 @@
 
         private ITwitchClient twitchClient;
 
-        public DiscordBot(ILogger<DiscordBot> logger, IOptions<BotConfig> botConfig,
-                          IOptions<DiscordBotConfig> discordConfig)
+        public DiscordBot(ILogger<DiscordBot> logger, BotConfig botConfig, DiscordBotConfig discordConfig)
         {
             this.logger = logger;
-            this.botConfig = botConfig.Value;
-            this.discordConfig = discordConfig.Value;
+            this.botConfig = botConfig;
+            this.discordConfig = discordConfig;
+        }
+
+        public DiscordBot(ILogger<DiscordBot> logger, IOptions<BotConfig> botConfig,
+                          IOptions<DiscordBotConfig> discordConfig)
+            : this(logger, botConfig.Value, discordConfig.Value)
+        {
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)

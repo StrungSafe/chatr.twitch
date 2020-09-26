@@ -12,6 +12,8 @@
 
     public partial class MainForm : Form
     {
+        private DiscordBot discordBot;
+
         private bool isRunning;
 
         private Bot twitchBot;
@@ -149,6 +151,18 @@
                                   };
             twitchBot = new Bot(twitchBotConfig, NullLogger<Bot>.Instance);
             await twitchBot.StartAsync(CancellationToken.None);
+
+            var discordBotConfig = new DiscordBotConfig
+                                   {
+                                       Channel = DiscordChannelTextBox.Text,
+                                       Token = DiscordTokenTextBox.Text,
+                                       Enabled = DiscordEnabledCheckBox.Checked
+                                   };
+            discordBot = new DiscordBot(NullLogger<DiscordBot>.Instance, twitchBotConfig, discordBotConfig);
+            if (DiscordEnabledCheckBox.Checked)
+            {
+                await discordBot.StopAsync(CancellationToken.None);
+            }
         }
 
         private async Task Stop()
@@ -167,6 +181,11 @@
             DiscordGroupBox.Enabled = true;
 
             await twitchBot.StopAsync(CancellationToken.None);
+
+            if (DiscordEnabledCheckBox.Checked)
+            {
+                await discordBot.StopAsync(CancellationToken.None);
+            }
         }
 
         private async void StopButton_Click(object sender, EventArgs e)
