@@ -9,17 +9,16 @@
     using Chatr.Core;
 
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging.Abstractions;
 
     public partial class MainForm : Form
     {
+        private readonly IServiceProvider serviceProvider;
+
         private DiscordBot discordBot;
 
         private bool isRunning;
 
         private Bot twitchBot;
-
-        private readonly IServiceProvider serviceProvider;
 
         public MainForm(IServiceProvider serviceProvider)
         {
@@ -144,7 +143,7 @@
 
             TwitchGroupBox.Enabled = false;
             DiscordGroupBox.Enabled = false;
-            
+
             var twitchBotConfig = new BotConfig
                                   {
                                       Name = TwitchNameTextBox.Text,
@@ -156,7 +155,7 @@
                                   };
             twitchBot = serviceProvider.GetRequiredService<Bot>();
             twitchBot.Config = twitchBotConfig;
-            
+
             await twitchBot.StartAsync(CancellationToken.None);
 
             var discordBotConfig = new DiscordBotConfig
