@@ -6,6 +6,8 @@
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
+    using Chatr.Core;
+
     using Microsoft.Extensions.Logging.Abstractions;
 
     public partial class MainForm : Form

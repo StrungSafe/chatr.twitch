@@ -1,6 +1,6 @@
-﻿namespace Chatr.Console
+﻿namespace Chatr.Core
 {
-    internal class DiscordBotConfig
+    public class DiscordBotConfig
     {
         public string Channel { get; set; }
 

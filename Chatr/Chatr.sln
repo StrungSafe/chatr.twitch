@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatr.Forms", "Chatr.Forms\Chatr.Forms.csproj", "{01DDDCD0-608C-48AC-9406-3E5991268979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chatr.Forms", "Chatr.Forms\Chatr.Forms.csproj", "{01DDDCD0-608C-48AC-9406-3E5991268979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatr.Core", "Chatr.Core\Chatr.Core.csproj", "{8C76F20B-3AF2-4CC9-A933-4453BBE5B1B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{01DDDCD0-608C-48AC-9406-3E5991268979}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01DDDCD0-608C-48AC-9406-3E5991268979}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01DDDCD0-608C-48AC-9406-3E5991268979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C76F20B-3AF2-4CC9-A933-4453BBE5B1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C76F20B-3AF2-4CC9-A933-4453BBE5B1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C76F20B-3AF2-4CC9-A933-4453BBE5B1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C76F20B-3AF2-4CC9-A933-4453BBE5B1B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

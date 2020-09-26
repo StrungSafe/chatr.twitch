@@ -1,4 +1,4 @@
-﻿namespace Chatr.Console.Extensions
+﻿namespace Chatr.Core.Extensions
 {
     using System;
     using System.Collections.Generic;

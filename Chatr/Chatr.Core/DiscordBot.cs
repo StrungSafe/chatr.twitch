@@ -1,4 +1,4 @@
-﻿namespace Chatr.Console
+﻿namespace Chatr.Core
 {
     using System;
     using System.Threading;
@@ -16,7 +16,7 @@
     using TwitchLib.Client.Interfaces;
     using TwitchLib.Client.Models;
 
-    internal class DiscordBot : IHostedService
+    public class DiscordBot : IHostedService
     {
         private readonly BotConfig botConfig;
 

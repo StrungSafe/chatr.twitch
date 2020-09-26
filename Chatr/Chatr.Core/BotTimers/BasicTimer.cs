@@ -1,11 +1,12 @@
-﻿namespace Chatr.Console.BotTimers
+﻿namespace Chatr.Core.BotTimers
 {
     using System;
     using System.Collections.Generic;
     using System.Timers;
 
-    using Chatr.Console.Contracts;
-    using Chatr.Console.Extensions;
+    using Chatr.Core;
+    using Chatr.Core.Contracts;
+    using Chatr.Core.Extensions;
 
     public class BasicTimer : IBotTimer
     {

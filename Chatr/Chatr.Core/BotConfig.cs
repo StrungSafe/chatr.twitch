@@ -1,8 +1,8 @@
-﻿namespace Chatr.Forms
+﻿namespace Chatr.Core
 {
     using System.Collections.Generic;
 
-    internal class BotConfig
+    public class BotConfig
     {
         public string Channel { get; set; }
 

@@ -1,9 +1,10 @@
-﻿namespace Chatr.Console.BotTimers
+﻿namespace Chatr.Core.BotTimers
 {
     using System;
     using System.Timers;
 
-    using Chatr.Console.Contracts;
+    using Chatr.Core;
+    using Chatr.Core.Contracts;
 
     using TwitchLib.Client.Interfaces;
 

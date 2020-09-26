@@ -1,4 +1,4 @@
-﻿namespace Chatr.Console
+﻿namespace Chatr.Core
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Chatr.Console.BotTimers;
+    using Chatr.Core.BotTimers;
 
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
@@ -18,7 +18,7 @@
     using TwitchLib.Client.Interfaces;
     using TwitchLib.Client.Models;
 
-    internal class Bot : IHostedService
+    public class Bot : IHostedService
     {
         private const char commandIdentifier = '!';
 
@@ -32,11 +32,16 @@
 
         private bool disposed;
 
-        public Bot(IOptions<BotConfig> config, ILogger<Bot> logger)
+        public Bot(BotConfig config, ILogger<Bot> logger)
         {
-            this.config = config.Value;
+            this.config = config;
             this.logger = logger;
             timerHandlers = new List<BotTimerHandler>();
+        }
+
+        public Bot(IOptions<BotConfig> config, ILogger<Bot> logger)
+            : this(config.Value, logger)
+        {
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -136,7 +141,7 @@
             if (config.Sources.Contains(onMessageReceivedArgs.ChatMessage.Channel)
                 || config.Channel == onMessageReceivedArgs.ChatMessage.Channel)
             {
-                if (onMessageReceivedArgs.ChatMessage.Message.StartsWith(commandIdentifier)
+                if (onMessageReceivedArgs.ChatMessage.Message.StartsWith(char.ToString(commandIdentifier))
                     && !config.KeepCommandsSynced)
                 {
                     logger.LogDebug("Not going to echo command");

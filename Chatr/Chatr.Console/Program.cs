@@ -1,5 +1,7 @@
 ﻿namespace Chatr.Console
 {
+    using Chatr.Core;
+
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;

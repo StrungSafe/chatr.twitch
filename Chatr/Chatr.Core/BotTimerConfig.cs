@@ -1,4 +1,4 @@
-﻿namespace Chatr.Console
+﻿namespace Chatr.Core
 {
     using System.Collections.Generic;
 

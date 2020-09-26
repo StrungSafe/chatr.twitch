@@ -1,4 +1,4 @@
-﻿namespace Chatr.Console.Contracts
+﻿namespace Chatr.Core.Contracts
 {
     using System;
     using System.Timers;
