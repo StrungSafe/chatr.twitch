@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Chatr.Core.BotTimers;
-
     using Microsoft.Extensions.Logging;
 
     using TwitchLib.Client.Interfaces;

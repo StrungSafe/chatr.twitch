@@ -40,7 +40,7 @@
         {
             if (!discordConfig.Enabled)
             {
-                logger.LogInformation("Discord Bot is disabled");
+                logger.LogInformation("Discord Bot is disabled and will not start");
                 return;
             }
 
@@ -68,6 +68,12 @@
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            if (!discordConfig.Enabled)
+            {
+                logger.LogInformation("Discord Bot is disabled and is already stopped");
+                return;
+            }
+
             twitchClient?.Disconnect();
             twitchClient = null;
 

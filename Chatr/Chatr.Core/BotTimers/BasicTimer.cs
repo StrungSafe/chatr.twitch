@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Timers;
 
-    using Chatr.Core;
     using Chatr.Core.Contracts;
     using Chatr.Core.Extensions;
 

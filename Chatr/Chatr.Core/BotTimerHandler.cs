@@ -1,16 +1,16 @@
-﻿namespace Chatr.Core.BotTimers
+﻿namespace Chatr.Core
 {
     using System;
     using System.Timers;
 
-    using Chatr.Core;
+    using Chatr.Core.BotTimers;
     using Chatr.Core.Contracts;
 
     using TwitchLib.Client.Interfaces;
 
     public class BotTimerHandler : IDisposable
     {
-        private readonly IBotTimer _botTimer;
+        private readonly IBotTimer botTimer;
 
         private readonly string channel;
 
@@ -26,9 +26,9 @@
             this.channel = channel;
 
             Type type = Type.GetType($"Chatr.Console.BotTimers.{config.Type}");
-            _botTimer = Activator.CreateInstance(type, config) as IBotTimer;
+            botTimer = Activator.CreateInstance(type, config) as IBotTimer;
 
-            timer = _botTimer.Build();
+            timer = botTimer.Build();
             timer.Elapsed += OnTimeElapsed;
         }
 
@@ -46,18 +46,18 @@
         private void OnTimeElapsed(object sender, EventArgs e)
         {
             string command = string.Empty;
-            if (_botTimer is RandomTimer)
+            if (botTimer is RandomTimer)
             {
-                command = _botTimer.OnTimeElapsed(() =>
+                command = botTimer.OnTimeElapsed(() =>
                 {
                     timer.Dispose();
-                    timer = _botTimer.Build();
+                    timer = botTimer.Build();
                     timer.Elapsed += OnTimeElapsed;
                 });
             }
             else
             {
-                command = _botTimer.OnTimeElapsed();
+                command = botTimer.OnTimeElapsed();
             }
 
             SendMessage(command);
